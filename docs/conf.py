@@ -1,20 +1,12 @@
 # -*- coding: utf-8 -*-
 #
-#
-# All configuration values have a default; values that are commented out
-# serve to show the default.
+from recommonmark.parser import CommonMarkParser
 
-import sys
-import os
+source_parsers = {
+    '.md': CommonMarkParser,
+}
 
-
-sys.path.append(os.path.abspath('..'))
-sys.path.append(os.path.abspath('./demo/'))
-
-# If extensions (or modules to document with autodoc) are in another directory,
-# add these directories to sys.path here. If the directory is relative to the
-# documentation root, use os.path.abspath to make it absolute, like shown here.
-#sys.path.insert(0, os.path.abspath('.'))
+source_suffix = ['.rst', '.md']
 
 # -- General configuration -----------------------------------------------------
 
@@ -105,7 +97,7 @@ html_theme_options = {
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
-html_logo = "demo/static/logo-wordmark-light.svg"
+#html_logo = "demo/static/logo-wordmark-light.svg"
 
 # The name of an image file (within the static path) to use as favicon of the
 # docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
