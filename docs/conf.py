@@ -18,19 +18,6 @@ sys.path.append(os.path.abspath('./demo/'))
 
 # -- General configuration -----------------------------------------------------
 
-# If your documentation needs a minimal Sphinx version, state it here.
-#needs_sphinx = '1.0'
-
-# Add any Sphinx extension module names here, as strings. They can be extensions
-# coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = [
-    'sphinx.ext.intersphinx',
-    'sphinx.ext.autodoc',
-    'sphinx.ext.mathjax',
-    'sphinx.ext.viewcode',
-    'sphinxcontrib.httpdomain',
-]
-
 # Do not warn about external images (status badges in README.rst)
 suppress_warnings = ['image.nonlocal_uri']
 
@@ -38,7 +25,7 @@ suppress_warnings = ['image.nonlocal_uri']
 templates_path = ['_templates']
 
 # The suffix of source filenames.
-source_suffix = '.mx'
+source_suffix = '.md'
 
 # The encoding of source files.
 #source_encoding = 'utf-8-sig'
@@ -93,9 +80,6 @@ pygments_style = 'default'
 # A list of ignored prefixes for module index sorting.
 #modindex_common_prefix = []
 
-intersphinx_mapping = {'rtd': ('https://docs.readthedocs.io/en/latest/', None)}
-
-
 # -- Options for HTML output ---------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
@@ -110,7 +94,7 @@ html_theme_options = {
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
-html_theme_path = ["../.."]
+#html_theme_path = ["../.."]
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
@@ -175,7 +159,7 @@ html_show_sourcelink = True
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'SphinxRTDthemedemodoc'
+#htmlhelp_basename = 'SphinxRTDthemedemodoc'
 
 
 # -- Options for LaTeX output --------------------------------------------------
