@@ -10,14 +10,12 @@ From the HoneyDB website your logs are accessible via a REST API.
 
 # Configuring HoneyDB Agent
 
-There are two configuration files for HoneyDB Agent, The default location for both files is the `/etc/honeydb`. The main configuration file is `agent.conc`, and the services configuration file is `services.conf`.
+There are two configuration files for HoneyDB Agent, The default location for both files is the `/etc/honeydb`. The main configuration file is `agent.conf`, and the services configuration file is `services.conf`.
 
 ## Agent Configuration
 
 In the `agent.conf` file, the main configuration section is the `[agent]` section and actually only has one option to configure.
 
-Name | Description
----------- | -------
 nodename | Name for this agent node to be displayed in tweets (if Twitter is configured).
 
 ## Service Configuration
