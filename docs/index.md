@@ -81,7 +81,34 @@ oauthsecret    = 654321
 
 ## Service Configuration
 
-The `service.conf` file tells HoneyDB Agent which services to launch. The service configuration file is used to define service names, ports, and plugins to run on your honeypot. Each service defined in the file has an `enabled` option. This option can be set to Yes or No to determine which services run on start.
+The `service.conf` file tells HoneyDB Agent which services to launch. The service configuration file is used to define service names, ports, and plugins to run on your honeypot. Each service defined in the file has an `enabled` option. This option can be set to Yes or No to determine which services run when the honeydb-agent is started.
+
+Example service definition:
+
+```
+[FTP]
+plugin      = FTP_tcp
+low_port    = tcp:21
+port        = tcp:21
+description = FTP service.
+enabled     = Yes
+```
+
+Explination of service definition:
+
+`[FTP]` - The service name. You can set your own service name, however service names must not contain spaces.
+
+`plugin = FTP_tcp` - The service plugin. The plugin specified determines what protocol emulation to implement.
+
+`low_port = tcp:21` - This value is used as a reference in scenarios where port forwarding with iptables is required. The protocol (TCP or UDP) and port the host will listen on for this service.
+
+`port = tcp:21` - The protocol (TCP or UDP) and port number to use when starting the service.
+
+NOTE: If you are not implementing port forwarding with iptables, `low_port` and `port` should have the same values.
+
+`description = FTP service.` - The description of the service.
+
+`enabled = Yes` - Yes or No, tells honeydb-agent if the service should run or not. 
 
 The default `services.conf` file comes with all services pre-configured. Review this file to see what plugins are available.
 
