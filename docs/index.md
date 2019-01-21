@@ -20,6 +20,16 @@ In the `agent.conf` file, the main configuration section is the `[agent]` sectio
 
 nodename | Name for this agent node to be displayed in tweets (if Twitter is configured).
 
+### Loggers
+
+Loggers tell the honeydb-agent where to send log data and are configured within the `agent.conf` file. There are three loggers available.
+
+#### HoneyDB
+
+#### Local
+
+#### Twitter
+
 ## Service Configuration
 
 The `service.conf` file tells HoneyDB Agent which services to launch. The service configuration file is used to define service names, ports, and plugins to run on your honeypot. Each service defined in the file has an `enabled` option. This option can be set to Yes or No to determine which services run on start.
