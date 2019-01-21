@@ -12,6 +12,8 @@ When configured to contribute log data to HoneyDB, all data are accessible via t
 
 # Installation
 
+Install packages are hosted on [Cloudsmith.io](https://cloudsmith.io), current version is <img src="https://api-prd.cloudsmith.io/badges/version/honeydb/honeydb-agent/rpm/honeydb-agent/latest/a=x86_64;d=el%252F7/?render=true" alt="Latest Version @ Cloudsmith" />
+
 **Linux**
 
 On Linux, the honeydb-agent can be installed via your package management system. First, you will need to add the honeydb-agent repository to your system, and then installed via package management tools (e.g `apt-get` or `yum`).
