@@ -104,14 +104,15 @@ Explination of service definition:
 
 `port = tcp:21` - The protocol (TCP or UDP) and port number to use when starting the service.
 
-NOTE: If you are not implementing port forwarding with iptables, `low_port` and `port` should have the same values.
+!!! note
+    If you are not implementing port forwarding with iptables, `low_port` and `port` should have the same values.
 
 `description = FTP service.` - The description of the service.
 
 `enabled = Yes` - Yes or No, tells honeydb-agent if the service should run or not. 
 
 !!! note
-    The default `services.conf` file comes with all services pre-configured. Review this file to see what plugins are available.
+    The default **services.conf** file comes with all services pre-configured. Review this file to see what plugins are available.
 
 ## Services
 
