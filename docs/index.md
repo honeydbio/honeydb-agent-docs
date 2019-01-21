@@ -12,7 +12,9 @@ When configured to contribute log data to HoneyDB, all data are accessible via t
 
 # Installation
 
-Install packages are hosted on [Cloudsmith.io](https://cloudsmith.io), current version is <img src="https://api-prd.cloudsmith.io/badges/version/honeydb/honeydb-agent/deb/honeydb-agent/latest/a=x86_64;d=stretch/?render=true" alt="Latest Version @ Cloudsmith" />
+Install packages are hosted on [Cloudsmith.io](https://cloudsmith.io), current version:
+
+<img src="https://api-prd.cloudsmith.io/badges/version/honeydb/honeydb-agent/deb/honeydb-agent/latest/d=debian%252Fstretch/?render=true" alt="Latest Version @ Cloudsmith" />
 
 **Linux**
 
