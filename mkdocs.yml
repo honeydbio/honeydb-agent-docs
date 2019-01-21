@@ -5,3 +5,4 @@ markdown_extensions:
 pages:
   - Home: index.md
   - Configuration: configuration.md
+  - Test: test.md
