@@ -1,4 +1,5 @@
 site_name: HoneyDB Agent Docs
+theme: readthedocs
 markdown_extensions:
   - admonition
 pages:
