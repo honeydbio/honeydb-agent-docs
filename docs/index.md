@@ -2,11 +2,13 @@
 
 [![Documentation Status](https://readthedocs.org/projects/honeypy/badge/?version=latest)](http://honeydb-agent-docs.readthedocs.io/en/latest/?badge=latest)
 
-**honeydb-agent**
+HoneyDB ([honeydb.io](http://honeydb.io)) provides real time data of honeypot activity. This data comes from honeypot sensors deployed globally on the Internet.
 
-The HoneyDB agent can implement numerous network service emulations (plugins). The level of interaction is determined by the functionality of the plugins. All activity is logged to a file by default, but the primary purpose for the honeydb-agent is to contribute the log data back to the [HoneyDB website](http://honeydb.io).
+**HoneyDB Agent**
 
-From the HoneyDB website your logs are accessible via a REST API.
+The honeydb-agent is a small honeypot program that can be easily deployed on Linux or Windows systems. The honeydb-agent can be configured to particpate in the HoneyDB network or operate standalone.  When running as a standalone agent all activity can be logged to local files, but the primary purpose for the honeydb-agent is to contribute log data back to the [HoneyDB website](http://honeydb.io). The honeydb-agent can implement numerous network service emulations (plugins). The level of interaction is determined by the functionality of the plugins.
+
+When configured to contribute log data to HoneyDB, all data are accessible via the [HoneyDB REST API](https://riskdiscovery.com/honeydb/threats). This means you can deploy the honeydb-agent quickly with minimal configuration effort and no requirement for log management.
 
 # Configuring HoneyDB Agent
 
