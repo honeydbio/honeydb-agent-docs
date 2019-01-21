@@ -36,9 +36,15 @@ A low interaction TCP service. This service will return an MD5 hash and integer 
 
 ## HTTP_tcp
 
+A low interaction TCP HTTP service. This service will provide a generic HTTP page to client requests. For certain known targeted applications like phpMyAdmin, wordpress, weblogic, tomcat, and jboss, static responses specific to those applications are returned to the client.
+
 ## iKettle_tcp
 
+A low interaction TCP smart kettle service. This service will respond to requests containing HELLOKETTLE with HELLOAPP.
+
 ## LDAP_tcp
+
+A low interaction TCP LDAP service. This service will provide generic responses to LDAP queries.
 
 ## Memcached_tcp
 
