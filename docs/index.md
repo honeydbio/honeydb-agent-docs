@@ -10,9 +10,9 @@ The honeydb-agent is a small honeypot program that can be easily deployed on Lin
 
 When configured to contribute log data to HoneyDB, all data are accessible via the [HoneyDB REST API](https://riskdiscovery.com/honeydb/threats). This means you can deploy the honeydb-agent quickly with minimal configuration effort and no requirement for log management.
 
-# Configuring HoneyDB Agent
+# Configuration
 
-There are two configuration files for HoneyDB Agent, The default location for both files is the `/etc/honeydb`. The main configuration file is `agent.conf`, and the services configuration file is `services.conf`.
+There are two configuration files for HoneyDB Agent, The default location for both files is `/etc/honeydb`. The main configuration file is `agent.conf`, and the services configuration file is `services.conf`.
 
 ## Agent Configuration
 
@@ -26,7 +26,7 @@ The `service.conf` file tells HoneyDB Agent which services to launch. The servic
 
 The default `services.conf` file comes with all services pre-configured. Review this file to see what plugins are available.
 
-### Services
+## Services
 
 #### Echo
 
