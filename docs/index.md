@@ -12,7 +12,7 @@ When configured to contribute log data to HoneyDB, all data are accessible via t
 
 # Installation
 
-Install packages are hosted on [Cloudsmith.io](https://cloudsmith.io), current version:
+Install packages are hosted by [Cloudsmith.io](https://cloudsmith.io), current version:
 
 <img src="https://api-prd.cloudsmith.io/badges/version/honeydb/honeydb-agent/deb/honeydb-agent/latest/d=debian%252Fstretch/?render=true" alt="Latest Version @ Cloudsmith" />
 
@@ -57,15 +57,27 @@ api_key  = 4321dcba
 
 #### Local
 
-To log data locally on the system use the Local logger.
+To log data locally on the system edit the `[local]` section in the `agent.conf` file, see example below:
 
 ```
 [local]
 enabled = Yes
-log_dir = /my/custom/path/honeydb
+log_dir = /your/custom/path/honeydb
 ```
 
 #### Twitter
+
+The honeydb-agent can be configured to tweet connection events (not all events are tweeted). To enable the
+Twitter logger you will need to Twitter API credentials, see [https://dev.twitter.com/oauth/application-only](https://dev.twitter.com/oauth/application-only). Edit the `[twitter]` section in the `agent.conf` file, see example below:
+
+```
+[twitter]
+enabled        = Yes
+consumerkey    = abcdefg
+consumersecret = 123456
+oauthtoken     = gfedcba
+oauthsecret    = 654321
+```
 
 ## Service Configuration
 
