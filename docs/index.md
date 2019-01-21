@@ -110,7 +110,7 @@ NOTE: If you are not implementing port forwarding with iptables, `low_port` and 
 
 `enabled = Yes` - Yes or No, tells honeydb-agent if the service should run or not. 
 
-!! note
+!!! note
 The default `services.conf` file comes with all services pre-configured. Review this file to see what plugins are available.
 
 ## Services
