@@ -20,7 +20,7 @@ A low interaction UDP echo service. Any data sent to this service will be echoed
 
 ## Elasticsearch_tcp
 
-A low interaction TCP Elasticsearch service. This service will handle requests to `/`, `/_nodes` and `/_search`, and will provide fake responses to the client.
+A low interaction TCP Elasticsearch service. This service will handle requests to **/**, **/_nodes** and **/_search**, and will provide fake responses to the client.
 
 ## FTP_udp
 
@@ -33,3 +33,45 @@ A low interaction TCP gas tank service. This service emulations gas station fuel
 ## HashCountRandom_tcp
 
 A low interaction TCP service. This service will return an MD5 hash and integer to the client. For each client connection, the counter will increment by 1 on each RX event.
+
+## HTTP_tcp
+
+## iKettle_tcp
+
+## LDAP_tcp
+
+## Memcached_tcp
+
+## Modbus_tcp
+
+## MOTD_tcp
+
+## MOTD_udp
+
+## MQTT_tcp
+
+## MySQL_tcp
+
+## NTP_udp
+
+## ProConOs_tcp
+
+## Random_tcp
+
+## RDP_tcp
+
+## Redis_tcp
+
+## SIP_udp
+
+## SMTP_tcp
+
+## SNMP_udp
+
+## SSH_tcp
+
+## Telnet_tcp
+
+## TFTP_udp
+
+## VNC_tcp
