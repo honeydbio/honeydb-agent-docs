@@ -57,6 +57,14 @@ api_key  = 4321dcba
 
 #### Local
 
+To log data locally on the system use the Local logger.
+
+```
+[local]
+enabled = Yes
+log_dir = /my/custom/path/honeydb
+```
+
 #### Twitter
 
 ## Service Configuration
