@@ -30,10 +30,10 @@ Instructions for adding the honeydb-agent package repository to you system can b
 
 [Raspbian (ARM)](https://riskdiscovery.com/honeydb/downloads#raspbian)
 
-## Windows
+### Windows
 
 [Win32](https://riskdiscovery.com/honeydb/downloads#windows)
 
-# OSX
+### OSX
 
 [OSX](https://riskdiscovery.com/honeydb/downloads#osx)
