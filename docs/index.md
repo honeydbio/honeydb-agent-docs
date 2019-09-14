@@ -4,19 +4,19 @@
 
 HoneyDB ([honeydb.io](http://honeydb.io)) provides real time data of honeypot activity. This data comes from honeypot sensors deployed globally on the Internet.
 
-**HoneyDB Agent**
+## HoneyDB Agent
 
 The honeydb-agent is a small honeypot program that can be easily deployed on Linux or Windows systems. The honeydb-agent can be configured to particpate in the HoneyDB network or operate standalone.  When running as a standalone agent all activity can be logged to local files, but the primary purpose for the honeydb-agent is to contribute log data back to the [HoneyDB website](http://honeydb.io). The honeydb-agent can implement numerous network service emulations (plugins). The level of interaction is determined by the functionality of the plugins.
 
 When configured to contribute log data to HoneyDB, all data are accessible via the [HoneyDB REST API](https://riskdiscovery.com/honeydb/threats). This means you can deploy the honeydb-agent quickly with minimal configuration effort and no requirement for log management.
 
-# Installation
+## Installation
 
 Install packages are hosted by [Cloudsmith.io](https://cloudsmith.io), current version:
 
 <img src="https://api-prd.cloudsmith.io/badges/version/honeydb/honeydb-agent/deb/honeydb-agent/latest/d=debian%252Fstretch/?render=true" alt="Latest Version @ Cloudsmith" />
 
-**Linux**
+### Linux
 
 On Linux, the honeydb-agent can be installed via your package management system. First, you will need to add the honeydb-agent repository to your system, then it can be installed via package management tools (e.g `apt-get` or `yum`).
 
@@ -29,3 +29,11 @@ Instructions for adding the honeydb-agent package repository to you system can b
 [Ubuntu](https://riskdiscovery.com/honeydb/downloads#ubuntu)
 
 [Raspbian (ARM)](https://riskdiscovery.com/honeydb/downloads#raspbian)
+
+## Windows
+
+[Win32](https://riskdiscovery.com/honeydb/downloads#windows)
+
+# OSX
+
+[OSX](https://riskdiscovery.com/honeydb/downloads#osx)
