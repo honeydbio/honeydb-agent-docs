@@ -9,11 +9,14 @@ In the `agent.conf` file, the main configuration section is the `[agent]` sectio
 Name | Description
 ---------- | -------
 nodename | Name for this agent node to be displayed in tweets (if Twitter is configured).
-logging | Yes or no, to enable agent logging. Default is No. Note: this logging relates to agent activity, not events collected from honeypot interaction.
+logging | Yes or no, to enable agent logging. Default is No.
+
+!!! note
+    The logging option above relates to the honeydb-agent's operational activity, not events collected from honeypot interaction.
 
 ### Loggers
 
-Loggers tell the honeydb-agent where to send log data and are configured within the `agent.conf` file. There are three loggers available.
+Loggers tell the honeydb-agent where to send honeypot interaction events and are configured within the `agent.conf` file. There are three loggers available.
 
 #### HoneyDB
 
