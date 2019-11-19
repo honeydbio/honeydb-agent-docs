@@ -9,6 +9,7 @@ In the `agent.conf` file, the main configuration section is the `[agent]` sectio
 Name | Description
 ---------- | -------
 nodename | Name for this agent node to be displayed in tweets (if Twitter is configured).
+logging | Yes or no, to enable agent logging. Default is No. Note: this logging relates to agent activity, not events collected from honeypot interaction.
 
 ### Loggers
 
