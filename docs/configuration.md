@@ -10,7 +10,7 @@ Name | Description
 ---------- | -------
 nodename | Name for this agent node to be displayed in tweets (if Twitter is configured).
 logging | Yes or no, to enable agent logging. Default is No.
-ip_address | remote or local, method agent uses to determine its IP address.
+ip_address | remote or local, method agent uses to determine its IP address. When agent is behind a NAT gatway, using remote will apply the gatway's public facing IP instead of the agent host's internal private IP.
 
 !!! note
     The logging option above relates to the honeydb-agent's operational activity, not events collected from honeypot interaction.
