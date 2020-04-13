@@ -4,6 +4,7 @@ markdown_extensions:
   - admonition
 pages:
   - Home: index.md
+  - Agent Service: agent_service.md
   - Configuration: configuration.md
   - Plugins: plugins.md
   - Services: services.md
