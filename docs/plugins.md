@@ -80,6 +80,8 @@ A low interaction TCP ProConOs service. This service will provide generic respon
 
 ## Random_tcp
 
+A low interaction TCP service that responds with random data.
+
 ## RDP_tcp
 
 ## Redis_tcp
