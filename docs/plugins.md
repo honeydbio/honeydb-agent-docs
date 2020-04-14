@@ -115,3 +115,5 @@ A medium interaction TCP Telnet service. This service will provide generic guess
 A medium interaction TCP TFTP service. This service will provide generic responses to TFTP queries.
 
 ## VNC_tcp
+
+A low interaction TCP VNC service. This service will handle login handshakes, but there is no succesful login interaction.
