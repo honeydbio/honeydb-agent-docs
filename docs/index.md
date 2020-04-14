@@ -32,8 +32,12 @@ Instructions for adding the honeydb-agent package repository to you system can b
 
 ### Windows
 
+On Windows the agent is packaged in a `.zip` file. Simply extract the contents of the zip file to a location of your preference. A common location is `C:\Program Files\`.
+
 [Win32](https://riskdiscovery.com/honeydb/downloads#windows)
 
 ### OSX
+
+On OSX the agent is packaged in a `tar.gz` file. Simply extract the contents of the zip file to a location of your preference.
 
 [OSX](https://riskdiscovery.com/honeydb/downloads#osx)
