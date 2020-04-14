@@ -68,6 +68,8 @@ A low interaction TCP MQTT service. This service will provide generic responses 
 
 ## MySQL_tcp
 
+A low interaction TCP MySQL service. This service will handle login handshakes, but there is no succesful login/query interaction.
+
 ## NTP_udp
 
 ## ProConOs_tcp
