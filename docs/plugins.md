@@ -112,4 +112,6 @@ A medium interaction TCP Telnet service. This service will provide generic guess
 
 ## TFTP_udp
 
+A medium interaction TCP TFTP service. This service will provide generic responses to TFTP queries.
+
 ## VNC_tcp
