@@ -96,7 +96,11 @@ A low interaction UDP SIP service. This service will provide generic responses t
 
 ## SMTP_tcp
 
+A low interaction UDP SMTP service. This service will provide generic responses to SMTP queries.
+
 ## SNMP_udp
+
+A low interaction UDP SNMP service. This service will provide generic responses to SNMP queries.
 
 ## SSH_tcp
 
