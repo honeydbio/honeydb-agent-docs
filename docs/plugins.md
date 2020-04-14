@@ -88,6 +88,8 @@ A low interaction TCP Remote Desktop Protocol (RDP) service. This service will e
 
 ## Redis_tcp
 
+A low interaction TCP Redis service. This service will provide generic responses to Redis queries.
+
 ## SIP_udp
 
 ## SMTP_tcp
