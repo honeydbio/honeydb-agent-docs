@@ -76,6 +76,8 @@ A low interaction TCP NTP service. This service will provide generic responses t
 
 ## ProConOs_tcp
 
+A low interaction TCP ProConOs service. This service will provide generic responses to ProConOs queries.
+
 ## Random_tcp
 
 ## RDP_tcp
