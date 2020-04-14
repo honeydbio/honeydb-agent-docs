@@ -52,6 +52,8 @@ A low interaction TCP Memcached service. This service will provide generic respo
 
 ## Modbus_tcp
 
+A low interaction TCP Modbus service. This service will provide generic responses to Modbus queries.
+
 ## MOTD_tcp
 
 ## MOTD_udp
