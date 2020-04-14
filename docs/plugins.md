@@ -60,6 +60,8 @@ A low interaction TCP Message Of The Day (MOTD) service. This service will respo
 
 ## MOTD_udp
 
+A low interaction UDP Message Of The Day (MOTD) service. This service will respond with a generic message.
+
 ## MQTT_tcp
 
 ## MySQL_tcp
