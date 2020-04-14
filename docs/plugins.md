@@ -64,6 +64,8 @@ A low interaction UDP Message Of The Day (MOTD) service. This service will respo
 
 ## MQTT_tcp
 
+A low interaction TCP MQTT service. This service will provide generic responses to MQTT queries.
+
 ## MySQL_tcp
 
 ## NTP_udp
