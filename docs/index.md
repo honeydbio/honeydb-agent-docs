@@ -32,7 +32,7 @@ Instructions for adding the honeydb-agent package repository to you system can b
 
 ### Windows
 
-On Windows the agent is packaged in a `.zip` file. Simply extract the contents of the zip file to a location of your preference. A common location is `C:\Program Files\`.
+On Windows the agent is packaged in a `.zip` file. Simply extract the contents of the zip file to a location of your preference. Example `C:\Program Files\honeydb-agent`. To install the agent as a system service, right click on the __Install.bat__ (included in the download package) and select, "Run as administrator".
 
 [Win32](https://riskdiscovery.com/honeydb/downloads#windows)
 

@@ -25,7 +25,25 @@ Restart the agent:
 
 ## Windows
 
-tbd
+On Windows you can start, stop, or restart the service from the services control panel Alternatively, you can use the following commands:
+
+Start the agent:
+
+```shell
+net start honeydb-agent
+```
+
+Stop the agent:
+
+```shell
+net stop honeydb-agent
+```
+
+Restart the agent:
+
+```shell
+net restart honeydb-agent
+```
 
 ## OSX
 
