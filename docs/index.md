@@ -38,6 +38,15 @@ On Windows the agent is packaged in a `.zip` file. Simply extract the contents o
 
 ### OSX
 
-On OSX the agent is packaged in a `.tar.gz` file. Simply extract the contents of the tar.gz file to a location of your preference.
+On OSX the agent is packaged in a `.tar.gz` file. Extract the contents of the tar.gz file to a temproary location. Open a terminal and change directory to
+the termporary location. Then run `./installer install`. The script uses the `sudo` command so you will be prompted for your password.
+
+Example installation steps:
+
+```shell
+cd ~/Downloads
+tar -xzf honeydb-agent-osx.tar.gz
+./install install
+```
 
 [OSX](https://riskdiscovery.com/honeydb/downloads#osx)
