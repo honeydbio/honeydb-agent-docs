@@ -92,6 +92,8 @@ A low interaction TCP Redis service. This service will provide generic responses
 
 ## SIP_udp
 
+A low interaction UDP SIP service. This service will provide generic responses to SIP queries.
+
 ## SMTP_tcp
 
 ## SNMP_udp
