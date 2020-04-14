@@ -72,6 +72,8 @@ A low interaction TCP MySQL service. This service will handle login handshakes, 
 
 ## NTP_udp
 
+A low interaction TCP NTP service. This service will provide generic responses to NTP queries.
+
 ## ProConOs_tcp
 
 ## Random_tcp
