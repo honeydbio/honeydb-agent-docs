@@ -45,6 +45,9 @@ Restart the agent:
 net restart honeydb-agent
 ```
 
+!!! note
+    To start/stop the service from the command line, you will need to open a command terminal with administrator privileges.
+
 ## OSX
 
 tbd
