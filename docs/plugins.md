@@ -56,6 +56,8 @@ A low interaction TCP Modbus service. This service will provide generic response
 
 ## MOTD_tcp
 
+A low interaction TCP Message Of The Day (MOTD) service. This service will respond with a generic message.
+
 ## MOTD_udp
 
 ## MQTT_tcp
