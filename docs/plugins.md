@@ -84,6 +84,8 @@ A low interaction TCP service that responds with random data.
 
 ## RDP_tcp
 
+A low interaction TCP Remote Desktop Protocol (RDP) service. This service will emulate a Windows login screen and attempts to login as Administrator.
+
 ## Redis_tcp
 
 ## SIP_udp
