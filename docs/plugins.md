@@ -108,6 +108,8 @@ A low interaction TCP SSH service. This service will handle login handshakes, bu
 
 ## Telnet_tcp
 
+A medium interaction TCP Telnet service. This service will provide generic guessable logins and emulate basic commands post login.
+
 ## TFTP_udp
 
 ## VNC_tcp
