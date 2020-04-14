@@ -48,6 +48,8 @@ A low interaction TCP LDAP service. This service will provide generic responses 
 
 ## Memcached_tcp
 
+A low interaction TCP Memcached service. This service will provide generic responses to Memcached queries.
+
 ## Modbus_tcp
 
 ## MOTD_tcp
