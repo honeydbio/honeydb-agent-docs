@@ -104,6 +104,8 @@ A low interaction UDP SNMP service. This service will provide generic responses 
 
 ## SSH_tcp
 
+A low interaction TCP SSH service. This service will handle login handshakes, but there is no succesful login/command interaction.
+
 ## Telnet_tcp
 
 ## TFTP_udp
