@@ -61,6 +61,17 @@ enabled     = Yes
 
 A low interaction TCP Elasticsearch service. This service will handle requests to **/**, **/_nodes** and **/_search**, and will provide fake responses to the client.
 
+Example service configuration:
+
+```shell
+[Elasticsearch]
+plugin      = Elasticsearch_tcp
+low_port    = tcp:9200
+port        = tcp:9200
+description = Send basic elasticsearch replies.
+enabled     = Yes
+```
+
 ### FTP_udp
 
 A low interaction TCP FTP service. This service will handle FTP login attempts but always return invalid login.
@@ -269,6 +280,12 @@ A low interaction TCP Redis service. This service will provide generic responses
 Example service configuration:
 
 ```shell
+[Redis]
+plugin      = Redis_tcp
+low_port    = tcp:6379
+port        = tcp:6379
+description = Basic Redis
+enabled     = Yes
 ```
 
 ### SIP_udp
