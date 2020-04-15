@@ -303,6 +303,12 @@ A medium interaction TCP TFTP service. This service will provide generic respons
 Example service configuration:
 
 ```shell
+[TFTP]
+plugin      = TFTP_udp
+low_port    = udp:69
+port        = udp:69
+description = TFTP service.
+enabled     = Yes
 ```
 
 ### VNC_tcp
