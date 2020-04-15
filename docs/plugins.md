@@ -59,6 +59,17 @@ A low interaction TCP Elasticsearch service. This service will handle requests t
 
 A low interaction TCP FTP service. This service will handle FTP login attempts but always return invalid login.
 
+Example service configuration:
+
+```shell
+[FTP]
+plugin      = FTP_tcp
+low_port    = tcp:21
+port        = tcp:21
+description = FTP service.
+enabled     = Yes
+```
+
 ### GAS_tcp
 
 A low interaction TCP gas tank service. This service emulations gas station fuel tanks. It will return randomly generated gas tank metrics back to the client.
@@ -98,6 +109,17 @@ A low interaction UDP Message Of The Day (MOTD) service. This service will respo
 ### MQTT_tcp
 
 A low interaction TCP MQTT service. This service will provide generic responses to MQTT queries.
+
+Example service configuration:
+
+```shell
+[MOTD]
+plugin      = MOTD_tcp
+low_port    = tcp:8
+port        = tcp:8
+description = Send a message via tcp and close connection.
+enabled     = Yes
+```
 
 ### MySQL_tcp
 
