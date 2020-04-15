@@ -165,6 +165,12 @@ A low interaction TCP LDAP service. This service will provide generic responses 
 Example service configuration:
 
 ```shell
+[LDAP]
+plugin      = LDAP_tcp
+low_port    = tcp:389
+port        = tcp:389
+description = LDAP server
+enabled     = Yes
 ```
 
 ### Memcached_tcp
