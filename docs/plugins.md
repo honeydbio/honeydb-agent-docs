@@ -243,6 +243,12 @@ A low interaction UDP SMTP service. This service will provide generic responses 
 Example service configuration:
 
 ```shell
+[SMTP]
+plugin      = SMTP_tcp
+low_port    = tcp:25
+port        = tcp:25
+description = SMTP service.
+enabled     = Yes
 ```
 
 ### SNMP_udp
