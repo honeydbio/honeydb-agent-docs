@@ -101,6 +101,14 @@ A low interaction TCP HTTP service. This service will provide a generic HTTP pag
 Example service configuration:
 
 ```shell
+[HTTP]
+plugin      = HTTP_tcp
+low_port    = tcp:80
+port        = tcp:80
+description = HTTP service.
+enabled     = Yes
+# absolute path to custom config (optional)
+config      = 
 ```
 
 ### iKettle_tcp
