@@ -19,6 +19,12 @@ A low interaction UDP Domain Name Service (DNS). For each DNS query to this serv
 Example service configuration:
 
 ```shell
+[DNS.udp]
+plugin      = DNS_udp
+low_port    = udp:53
+port        = udp:53
+description = DNS service.
+enabled     = Yes
 ```
 
 ### Echo_tcp
