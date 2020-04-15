@@ -145,6 +145,12 @@ A low interaction TCP Modbus service. This service will provide generic response
 Example service configuration:
 
 ```shell
+[Modbus]
+plugin      = Modbus_tcp
+low_port    = tcp:502
+port        = tcp:502
+description = Modbus service.
+enabled     = Yes
 ```
 
 ### MOTD_tcp
