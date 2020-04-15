@@ -12,6 +12,21 @@ Either TCP or UDP plugins may also log information (INFO) events. These events c
 
 ## Plugins List
 
+### ClickhouseHTTP_tcp
+
+A low interaction TCP ClickHouse HTTP service. This service will provide generic responses to ClickHouse queries.
+
+Example service configuration:
+
+```shell
+[ClickhouseHTTP]
+plugin      = ClickhouseHTTP_tcp
+low_port    = tcp:8123
+port        = tcp:8123
+description = Clickhouse HTTP interface
+enabled     = Yes
+```
+
 ### DNS_udp
 
 A low interaction UDP Domain Name Service (DNS). For each DNS query to this service a random IP address is generated and returned to the client.
