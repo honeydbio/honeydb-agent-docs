@@ -261,6 +261,12 @@ A low interaction TCP SSH service. This service will handle login handshakes, bu
 Example service configuration:
 
 ```shell
+[SSH]
+plugin      = SSH_tcp
+low_port    = tcp:22
+port        = tcp:22
+description = SSH service.
+enabled     = Yes
 ```
 
 ### Telnet_tcp
@@ -270,6 +276,12 @@ A medium interaction TCP Telnet service. This service will provide generic guess
 Example service configuration:
 
 ```shell
+[Telnet]
+plugin      = Telnet_tcp
+low_port    = tcp:23
+port        = tcp:23
+description = Telnet service.
+enabled     = Yes
 ```
 
 ### TFTP_udp
