@@ -92,6 +92,12 @@ A low interaction TCP service. This service will return an MD5 hash and integer 
 Example service configuration:
 
 ```shell
+[HashCountRandom]
+plugin      = HashCountRandom_tcp
+low_port    = tcp:4096
+port        = tcp:4096
+description = Send random data prefixed with a hash of a counter via tcp.
+enabled     = Yes
 ```
 
 ### HTTP_tcp
