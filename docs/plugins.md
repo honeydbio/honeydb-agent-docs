@@ -109,6 +109,12 @@ A low interaction TCP gas tank service. This service emulations gas station fuel
 Example service configuration:
 
 ```shell
+[Gas]
+plugin      = Gas_tcp
+low_port    = tcp:10001
+port        = tcp:10001
+description = Gas pump protocol.
+enabled     = Yes
 ```
 
 ### HashCountRandom_tcp
