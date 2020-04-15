@@ -1,6 +1,6 @@
 # Plugins
 
-Plugins are what drive service emulation and determine the level of interaction possible with a given service. Plugins can either be based on TCP or UDP protocols. Plugins also determine what events and data is logged.
+Plugins are what drive service emulation and determine the level of interaction possible with a given service. Plugins can either be based on TCP or UDP protocols. Plugins also determine what events and data are logged.
 
 ## Events
 
