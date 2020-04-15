@@ -234,7 +234,12 @@ A low interaction TCP MQTT service. This service will provide generic responses 
 Example service configuration:
 
 ```shell
-
+[MQTT]
+plugin      = MQTT_tcp
+low_port    = tcp:1883
+port        = tcp:1883
+description = MQTT
+enabled     = Yes
 ```
 
 ### MySQL_tcp
