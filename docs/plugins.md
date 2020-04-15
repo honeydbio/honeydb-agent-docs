@@ -200,6 +200,12 @@ A low interaction TCP MySQL service. This service will handle login handshakes, 
 Example service configuration:
 
 ```shell
+[MySQL]
+plugin      = MySQL_tcp
+low_port    = tcp:3306
+port        = tcp:3306
+description = MySQL server
+enabled     = Yes
 ```
 
 ### NTP_udp
