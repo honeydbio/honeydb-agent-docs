@@ -16,13 +16,40 @@ Either TCP or UDP plugins may also log information (INFO) events. These events c
 
 A low interaction UDP Domain Name Service (DNS). For each DNS query to this service a random IP address is generated and returned to the client.
 
+Example service configuration:
+
+```shell
+```
+
 ### Echo_tcp
 
 A low interaction TCP echo service. Any data sent to this service will be echoed back to the client.
 
+Example service configuration:
+
+```shell
+[Echo]
+plugin      = Echo_tcp
+low_port    = tcp:7
+port        = tcp:7
+description = Echo back data received via tcp.
+enabled     = Yes
+```
+
 ### Echo_udp
 
 A low interaction UDP echo service. Any data sent to this service will be echoed back to the client.
+
+Example service configuration:
+
+```shell
+[Echo.udp]
+plugin      = Echo_udp
+low_port    = udp:7
+port        = udp:7
+description = Echo back data received via udp.
+enabled     = Yes
+```
 
 ### Elasticsearch_tcp
 
