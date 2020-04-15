@@ -1,12 +1,16 @@
-# Description
+# Plugins
 
-Plugins are what drive service emulation and determine the level of interaction possible with a given service. Plugins can either be based on TCP or UDP protocols.
+Plugins are what drive service emulation and determine the level of interaction possible with a given service. Plugins can either be based on TCP or UDP protocols. Plugins also determine what events and data is logged.
+
+## Events
 
 For TCP plugins, all connection (CONNECT) events, data received (RX) events, and data transmitted (TX) events are logged.
 
 For TCP plugins, all data received (RX) events and data transmitted (TX) events are logged. With UDP there are no CONNECT events.
 
-# Plugins List
+Either TCP or UDP plugins may also log information (INFO) events. These events contain specific data of interest, typically extracted from an RX event. For example, usernames and passwords maybe captured in an INFO event.
+
+## Plugins List
 
 ### DNS_udp
 
