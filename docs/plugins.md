@@ -254,6 +254,12 @@ A low interaction TCP Remote Desktop Protocol (RDP) service. This service will e
 Example service configuration:
 
 ```shell
+[RDP]
+plugin      = RDP_tcp
+low_port    = tcp:3389
+port        = tcp:3389
+description = Windows RDP service.
+enabled     = Yes
 ```
 
 ### Redis_tcp
