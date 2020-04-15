@@ -227,6 +227,12 @@ A low interaction TCP service that responds with random data.
 Example service configuration:
 
 ```shell
+[Random]
+plugin      = Random_tcp
+low_port    = tcp:2048
+port        = tcp:2048
+description = Send random data via tcp.
+enabled     = Yes
 ```
 
 ### RDP_tcp
