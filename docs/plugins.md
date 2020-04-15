@@ -140,6 +140,12 @@ A low interaction TCP Message Of The Day (MOTD) service. This service will respo
 Example service configuration:
 
 ```shell
+[MOTD]
+plugin      = MOTD_tcp
+low_port    = tcp:8
+port        = tcp:8
+description = Send a message via tcp and close connection.
+enabled     = Yes
 ```
 
 ### MOTD_udp
@@ -149,6 +155,12 @@ A low interaction UDP Message Of The Day (MOTD) service. This service will respo
 Example service configuration:
 
 ```shell
+[MOTD.udp]
+plugin      = MOTD_udp
+low_port    = udp:8
+port        = udp:8
+description = Send a message via udp.
+enabled     = Yes
 ```
 
 ### MQTT_tcp
@@ -158,12 +170,7 @@ A low interaction TCP MQTT service. This service will provide generic responses 
 Example service configuration:
 
 ```shell
-[MOTD]
-plugin      = MOTD_tcp
-low_port    = tcp:8
-port        = tcp:8
-description = Send a message via tcp and close connection.
-enabled     = Yes
+
 ```
 
 ### MySQL_tcp
