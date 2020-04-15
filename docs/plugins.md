@@ -153,6 +153,12 @@ A low interaction TCP Memcached service. This service will provide generic respo
 Example service configuration:
 
 ```shell
+[Memecached]
+plugin      = Memcached_tcp
+low_port    = tcp:11211
+port        = tcp:11211
+description = Send basic memcached replies.
+enabled     = Yes
 ```
 
 ### Modbus_tcp
