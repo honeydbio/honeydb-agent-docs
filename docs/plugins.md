@@ -362,4 +362,10 @@ A low interaction TCP VNC service. This service will handle login handshakes, bu
 Example service configuration:
 
 ```shell
+[VNC]
+plugin      = VNC_tcp
+low_port    = tcp:5900
+port        = tcp:5900
+description = Low interaction VNC service
+enabled     = Yes
 ```
