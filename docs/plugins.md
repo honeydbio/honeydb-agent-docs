@@ -337,7 +337,7 @@ Example service configuration:
 plugin      = SIP_udp
 low_port    = udp:5060
 port        = udp:5060
-description = The Session Initiation Protocol (SIP) is a communications protocol for signaling and controlling multimedia communication session such as voice and video calls.
+description = Session Initiation Protocol (SIP) for voice and video calls.
 enabled     = Yes
 ```
 
