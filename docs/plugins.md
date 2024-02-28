@@ -25,6 +25,42 @@ low_port    = tcp:8123
 port        = tcp:8123
 description = Clickhouse HTTP interface
 enabled     = Yes
+config      = /absolute/path/to/clickhouse.json
+```
+
+#### Config
+
+```
+{
+    "clickhouse_version": "20.1.4.14",
+    "clickhouse_server_display_name": "stage.domain.com",
+}
+```
+
+### CouchDB_tcp
+
+A low interaction TCP CouchDB HTTP service. This service will provide generic responses to CouchDB queries.
+
+Example service configuration:
+
+```shell
+[ClickhouseHTTP]
+plugin      = CouchDB_tcp
+low_port    = tcp:5984
+port        = tcp:5984
+description = CouchDB HTTP interface
+enabled     = Yes
+config      = /absolute/path/to/couchdb.json
+```
+
+#### Config
+
+```
+{
+    "server_version": "CouchDB/1.6.1 (Erlang OTP/R16B03)",
+    "vendor_name": "Ubuntu",
+    "vendor_version": "22.04"
+}
 ```
 
 ### DNS_udp
