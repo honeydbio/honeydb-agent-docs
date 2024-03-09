@@ -138,6 +138,24 @@ description = FTP service.
 enabled     = Yes
 ```
 
+#### Config
+
+- __interaction_level__ - "low" or "medium"
+    - _low_ - Log in prompt only.
+    - _medium_ - Allows anonymous login, logins based on __password_file__, file uploads, and downloads.
+- __welcome_message__ - FTP server banner string.
+- __ftp_root__ - FTP root directory. This is where FTP user folders will be created and file uploads are stored.
+- __password_file__ - File containing FTP user names and passwords in the format of: __user:password__, one entry per line.
+
+```
+{
+    "interaction_level": "medium",
+    "welcome_message": "(vsFTPd 3.0.3)",
+    "ftp_root": "/tmp/honeydb/ftp",
+    "password_file": "/etc/honeydb/ftppasswd.dat"
+}
+```
+
 ### GAS_tcp
 
 A low interaction TCP gas tank service. This service emulations gas station fuel tanks. It will return randomly generated gas tank metrics back to the client.
