@@ -123,7 +123,7 @@ description = Send basic elasticsearch replies.
 enabled     = Yes
 ```
 
-### FTP_udp
+### FTP_tcp
 
 A low interaction TCP FTP service. This service will handle FTP login attempts but always return invalid login.
 
