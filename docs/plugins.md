@@ -350,21 +350,6 @@ description = Send random data via tcp.
 enabled     = Yes
 ```
 
-### RDP_tcp
-
-A low interaction TCP Remote Desktop Protocol (RDP) service. This service will emulate a Windows login screen and attempts to login as Administrator.
-
-Example service configuration:
-
-```shell
-[RDP]
-plugin      = RDP_tcp
-low_port    = tcp:3389
-port        = tcp:3389
-description = Windows RDP service.
-enabled     = Yes
-```
-
 ### Redis_tcp
 
 A low interaction TCP Redis service. This service will provide generic responses to Redis queries.
