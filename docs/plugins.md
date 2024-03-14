@@ -25,7 +25,7 @@ low_port    = tcp:8123
 port        = tcp:8123
 description = Clickhouse HTTP interface
 enabled     = Yes
-config      = /absolute/path/to/clickhouse.json
+config      = /etc/honeydb/clickhouse.json
 ```
 
 #### Config
@@ -50,7 +50,7 @@ low_port    = tcp:5984
 port        = tcp:5984
 description = CouchDB HTTP interface
 enabled     = Yes
-config      = /absolute/path/to/couchdb.json
+config      = /etc/honeydb/couchdb.json
 ```
 
 #### Config
@@ -393,6 +393,16 @@ low_port    = tcp:25
 port        = tcp:25
 description = SMTP service.
 enabled     = Yes
+config      = /etc/honeydb/clickhouse.json
+```
+
+#### Config
+
+```
+{
+    "server_name": "localhost",
+    "version_string": "ESMTP Exim 4.80"
+}
 ```
 
 ### SNMP_udp
