@@ -393,7 +393,7 @@ low_port    = tcp:25
 port        = tcp:25
 description = SMTP service.
 enabled     = Yes
-config      = /etc/honeydb/clickhouse.json
+config      = /etc/honeydb/smtp.json
 ```
 
 #### Config
