@@ -214,7 +214,7 @@ Example service configuration:
 
 ### Kubernetes_tcp
 
-A low interaction TCP Kubernetes service. This service will provide handle responses to Kubernetes cluster info, get services queries.
+A low interaction TCP Kubernetes service. This service will handle responses to Kubernetes cluster info, get services queries.
 Example service configuration:
 
 ```shell
