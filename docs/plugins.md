@@ -218,8 +218,8 @@ A low interaction TCP Kubernetes service. This service will handle responses to 
 Example service configuration:
 
 ```shell
-[HashCountRandom]
-plugin      = Kubernetestcp
+[Kubernetes]
+plugin      = Kubernetes_tcp
 low_port    = tcp:6443
 port        = tcp:6443
 description = Send basic Kubernetes server replies.
