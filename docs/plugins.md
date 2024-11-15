@@ -212,6 +212,20 @@ Example service configuration:
 ```shell
 ```
 
+### Kubernetes_tcp
+
+A low interaction TCP Kubernetes service. This service will handle responses to Kubernetes cluster info, get services queries.
+Example service configuration:
+
+```shell
+[HashCountRandom]
+plugin      = Kubernetestcp
+low_port    = tcp:6443
+port        = tcp:6443
+description = Send basic Kubernetes server replies.
+enabled     = Yes
+```
+
 ### LDAP_tcp
 
 A low interaction TCP LDAP service. This service will provide generic responses to LDAP queries.
