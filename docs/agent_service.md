@@ -50,4 +50,23 @@ net restart honeydb-agent
 
 ## OSX
 
-tbd
+On OSX, the HoneyDB Agent service is managed with launchd. You can use the following commands to control the agent service.
+
+Start the agent:
+
+```shell
+launchctl start honeydb-agent
+```
+
+Stop the agent:
+
+```shell
+launchctl stop honeydb-agent
+```
+
+Restart the agent:
+
+```shell
+launchctl stop honeydb-agent
+launchctl start honeydb-agent
+```
