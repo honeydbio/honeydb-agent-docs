@@ -8,7 +8,7 @@ In the `agent.conf` file, the main configuration section is the `[agent]` sectio
 
 Name | Description
 ---------- | -------
-nodename | Name for this agent node to be displayed in tweets (if Twitter is configured).
+nodename | Name for this agent node.
 logging | Yes or no, to enable agent logging. Default is No.
 ip_address | remote or local, method agent uses to determine its IP address. When agent is behind a NAT gateway, using remote will apply the gatway's public facing IP instead of the agent host's internal private IP.
 
@@ -17,7 +17,7 @@ ip_address | remote or local, method agent uses to determine its IP address. Whe
 
 ### Loggers
 
-Loggers tell the honeydb-agent where to send honeypot interaction events and are configured within the `agent.conf` file. There are three loggers available.
+Loggers tell the honeydb-agent where to send honeypot interaction events and are configured within the `agent.conf` file. There are two loggers available.
 
 #### HoneyDB
 
@@ -38,20 +38,6 @@ To log data locally on the system edit the `[local]` section in the `agent.conf`
 [local]
 enabled = Yes
 log_dir = /your/custom/path/honeydb
-```
-
-#### Twitter
-
-The honeydb-agent can be configured to tweet connection events (not all events are tweeted). To enable the
-Twitter logger you will need to Twitter API credentials, see [https://dev.twitter.com/oauth/application-only](https://dev.twitter.com/oauth/application-only). Edit the `[twitter]` section in the `agent.conf` file, see example below:
-
-```
-[twitter]
-enabled        = Yes
-consumerkey    = abcdefg
-consumersecret = 123456
-oauthtoken     = gfedcba
-oauthsecret    = 654321
 ```
 
 ## Service Configuration
