@@ -58,6 +58,16 @@ config      = /etc/honeydb/clickhouse.json
 | `structured_info_events` | bool | `true` | Emit JSON-encoded INFO payloads; `false` reverts Basic auth events to legacy free-text. |
 | `query_indicator_max_bytes` | int | `8192` | Truncation cap for the `query` field in query events. |
 
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `http_client` | Captures the User-Agent, Content-Type, method, path, and query string of each HTTP request. |
+| `xff_seen` | Fires when an `X-Forwarded-For` header is present; records the peer, XFF value, whether it was honored, and the resolved client. |
+| `auth_attempt` | Captures an authentication attempt (auth type, username, password, success). |
+| `query` | Captures a received ClickHouse SQL query, its delivery channel and format, and whether a canned response matched. |
+| `unknown_path` | Captures a request to an unrecognized HTTP path (method, path, query). |
+
 ### CouchDB_tcp
 
 A low interaction TCP service that emulates an Apache CouchDB HTTP server. Supports two version profiles (`1.x` and `3.x`), a realistic database and document API, Basic and cookie authentication, and detection of known CVE exploit patterns (CVE-2017-12635, CVE-2017-12636).
@@ -95,6 +105,16 @@ config      = /etc/honeydb/couchdb.json
 | `structured_info_events` | bool | `true` | Emit JSON-encoded INFO payloads; `false` reverts Basic auth events to legacy free-text. |
 | `honor_xff_header` | bool | `false` | Trust the `X-Forwarded-For` header to resolve the effective client IP. |
 
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `auth_attempt` | Captures a Basic or cookie/session login attempt (auth type, username, password, success). |
+| `cve_attempt` | Fires when a request matches a known CouchDB CVE signature (CVE id, method, path, indicators). |
+| `novel_path` | Captures a request to a path outside the known/profiled route set. |
+| `db_operation` | Captures a database-level operation (create/delete/info, database name, success). |
+| `doc_operation` | Captures a document-level operation (database, document id, success). |
+
 ### DNS_tcp
 
 A low interaction TCP Domain Name Service (DNS). Answers queries against a configurable synthetic zone, supports query pipelining on a single connection, detects non-DNS traffic (such as TLS handshakes against the DNS port), and can optionally engage zone transfer (AXFR) requests. Abuse patterns such as DNS tunneling, DGA-like names, and enumeration bursts are detected and logged. Rate limiting state is shared with `DNS_udp`, so an attacker rate-limited on UDP is also rate-limited on TCP.
@@ -122,6 +142,13 @@ The configuration schema is identical to `DNS_udp` (see below) plus the TCP-spec
 | `axfr_policy` | string | `"refused"` | One of `"refused"` or `"engage"`. Engagement streams the full synthetic zone in a multi-message AXFR. |
 | `max_axfr_engagements_per_minute` | int | `1` | Per-source cap on AXFR engagements. `0` disables engagement entirely. |
 | `max_axfr_messages_per_engagement` | int | `100` | Hard cap on AXFR stream length. Larger zones are truncated. |
+
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `dns_query` | Captures each parsed DNS query (qname, qtype, returned rcode). |
+| `abuse_pattern` | Fires when a query matches an abuse detector or error condition; a `pattern` field discriminates the type (`parse_error`, `rate_limited`, `internal_error`, `chaos_probe`, amplification probe, zone-transfer attempt, DNSSEC probe, tunneling, DGA-like apex, enumeration burst, and the TCP-only `non_dns_traffic`). |
 
 ### DNS_udp
 
@@ -179,6 +206,13 @@ Each entry in `zones` is a dict:
 
 Wildcard labels (`*`) are not supported.
 
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `dns_query` | Captures each parsed DNS query (qname, qtype, returned rcode). |
+| `abuse_pattern` | Fires when a query matches an abuse detector or error condition; a `pattern` field discriminates the type (`parse_error`, `rate_limited`, `internal_error`, `chaos_probe`, amplification probe, zone-transfer attempt, DNSSEC probe, tunneling, DGA-like apex, enumeration burst). |
+
 ### Echo_tcp
 
 A low interaction TCP echo service (RFC 862). Any data sent to this service will be echoed back to the client. Received data is also checked for credential-like strings, which are captured as INFO events.
@@ -202,6 +236,13 @@ enabled     = Yes
 | `detect_credential_like` | bool | `true` | Enable credential-shape INFO events. |
 | `event_field_max_bytes` | int | `1024` | Per-string byte truncation cap inside event payloads. |
 | `override_name` | bool | `false` | When `false`, the service is reported as `"Echo"` to normalize naming with `Echo_udp`. When `true`, the configured service name is used. |
+
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `scanner_fingerprint` | Fires when received bytes match a known scanner fingerprint (scanner name, pattern id, payload size). |
+| `credential_like_string` | Fires when received bytes contain credential-like strings. |
 
 ### Echo_udp
 
@@ -233,6 +274,14 @@ enabled     = Yes
 
 !!! note
     Earlier versions of this plugin reflected the full received datagram with no size cap. To restore that behavior, set `max_echo_bytes` to a sufficiently large value.
+
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `scanner_fingerprint` | Fires when the datagram matches a known scanner fingerprint (scanner name, pattern id, payload size). |
+| `credential_like_string` | Fires when the datagram contains credential-like strings. |
+| `amplification_probe_suspected` | Fires when a datagram looks like a UDP amplification probe (size / repeated-byte heuristics). |
 
 ### Elasticsearch_tcp
 
@@ -272,6 +321,16 @@ Profile defaults:
 | `version_number` | `1.4.1` | `7.17.0` | `8.11.0` |
 | `lucene_version` | `4.10.4` | `8.11.1` | `9.7.0` |
 
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `user_agent` | Captures the request User-Agent header. |
+| `credentials` | Captures HTTP Basic Auth credentials when an Authorization header is present. |
+| `novel_path` | Captures a request to a path outside the emulated endpoint set (method, path, query). |
+| `body_capture` | Captures the (truncated) request body. |
+| `cve_attempt` | Fires on a known CVE pattern (CVE-2014-3120, CVE-2015-1427, Log4Shell CVE-2021-44228); records the CVE id and indicators. |
+
 ### FTP_tcp
 
 A low/medium interaction TCP FTP service. Captures credentials and attacker commands, and detects known CVE exploit patterns (CVE-2011-0762 vsftpd backdoor, CVE-2015-3306 ProFTPD mod_copy). At the `low` interaction level all logins are denied; at `medium`, anonymous logins and logins from the password file are allowed, along with file uploads and downloads.
@@ -309,6 +368,21 @@ config      = /etc/honeydb/ftp.json
 }
 ```
 
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `username` | Captures the username from the USER command. |
+| `credentials` | Captures the username/password pair from the PASS command. |
+| `cve_attempt` | Fires on a CVE indicator: a USER ending in `:)` (CVE-2011-0762 vsftpd backdoor) or a SITE CPFR/CPTO sequence (CVE-2015-3306 ProFTPD mod_copy). |
+| `client` | Captures the reported client version from the CLNT command. |
+| `auth_mechanism` | Captures the mechanism requested by the AUTH command. |
+| `probe` | Fires on a SYST or FEAT probe command. |
+| `port_command` | Captures the parsed IP and port from a PORT command. |
+| `eprt_command` | Captures the parsed protocol, address, and port from an EPRT command. |
+| `site_command` | Captures a SITE subcommand and its parameters. |
+| `directory_traversal` | Fires when a RETR/STOR/LIST/MKD/DELE path contains `../` or `..\`. |
+
 ### Gas_tcp
 
 A low interaction TCP gas tank service. Emulates a Veeder-Root TLS Automatic Tank Gauge (ATG) — the industrial control system used at gas stations to monitor underground fuel storage tanks. Responds to common read and write commands with realistic sensor data, and captures attempts to change tank labels or the system date/time.
@@ -334,6 +408,13 @@ config      = /etc/honeydb/gas.json
 | `product2` | string | `"UNLEAD"` | Tank 2 product label. |
 | `product3` | string | `"DIESEL"` | Tank 3 product label. |
 | `product4` | string | `"PREMIUM"` | Tank 4 product label. |
+
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `protocol_violation` | Fires when a received ATG command is malformed (missing the SOH start byte or too short to be valid). |
+| `atg_command` | Captures a recognized ATG command and its type, including date/time-set (S001) and tank/label-set (S602xx) write attempts; unrecognized commands are captured with their raw bytes. |
 
 ### HashCountRandom_tcp
 
@@ -366,6 +447,21 @@ enabled     = Yes
 config      = 
 ```
 
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `fingerprint` | Captures the client fingerprint submitted to the JS-based `/session` endpoint. |
+| `credentials` | Captures username/password from a POST login form body for a matched target. |
+| `client_headers` | Captures the User-Agent and/or Referer sent to a matched target path. |
+| `basic_auth` | Captures HTTP Basic Auth credentials for a target. |
+| `path_cves` | Captures CVE identifiers associated with a matched configured path. |
+| `cve_pattern` | Fires on a CVE pattern match in the request path, body, or headers. |
+| `tbk_dvr_command` | Captures the injected command for CVE-2024-3721 (TBK DVR command injection). |
+| `tbk_dvr_dropper` | Captures dropper indicators (tools, URLs, hosts, filenames) extracted from the injected command. |
+| `tbk_dvr_signatures` | Captures matched loader signatures (user-agent, cookie, magic string) for CVE-2024-3721. |
+| `unknown_path` | Captures a request to an unmatched (404) path (method, path, query, User-Agent). |
+
 ### iKettle_tcp
 
 A low interaction TCP smart kettle service. Emulates the Smarter iKettle 2.0 smart kettle, which communicates over plain TCP with no authentication and is actively indexed by Shodan and probed by automated scanners. Captures which commands attackers issue — device fingerprinting, control attempts (boil, stop, set temperature), and supplied parameters.
@@ -380,6 +476,17 @@ port        = tcp:2081
 description = iKettle smart kettle emulation.
 enabled     = Yes
 ```
+
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `version_query` | Fires on a firmware/version query command (`0x11`). |
+| `status_query` | Fires on a status query command (`0x21`). |
+| `stop_command` | Fires on a stop command (`0x61`). |
+| `boil_command` | Fires on a boil command (`0x65`); captures the target and keep-warm temperatures. |
+| `set_temperature` | Fires on a set-temperature command (`0x69`); captures the target temperature. |
+| `unknown_command` | Fires on an unrecognized command byte. |
 
 ### IMAP_tcp
 
@@ -408,6 +515,15 @@ config      = /etc/honeydb/imap.json
 | `capabilities_post_auth` | list | `["IMAP4rev1","IDLE","NAMESPACE"]` | Capabilities advertised after authentication. |
 | `mailboxes` | list | `["INBOX","Sent","Drafts","Trash","Spam"]` | Mailboxes available to clients. |
 
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `credentials` | Captures the username/password from a LOGIN command. |
+| `imap_select` | Fires on SELECT or EXAMINE; records the mailbox and read-only flag. |
+| `imap_search` | Captures the criteria from a SEARCH command. |
+| `imap_append` | Captures the mailbox and uploaded message body from an APPEND command. |
+
 ### IPP_tcp
 
 A low interaction TCP Internet Printing Protocol (IPP/2.0) service. Accepts both HTTP-wrapped IPP requests (as used by CUPS, Windows, and exploit frameworks) and raw IPP binary. Captures print-job metadata, usernames, targeted printer URIs, and CVE exploit patterns (CVE-2024-47176, CVE-2024-47177).
@@ -433,6 +549,18 @@ config      = /etc/honeydb/ipp.json
 | `printer_name` | string | `"HP LaserJet Pro MFP"` | Printer name returned in Get-Printer-Attributes responses. |
 | `printer_location` | string | `"Office - Floor 2"` | Location string returned in Get-Printer-Attributes responses. |
 
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `ipp_username` | Captures the requesting-user-name attribute and the operation. |
+| `ipp_abuse_pattern` | Fires on a shell-injection (CVE-2024-47177) or suspicious printer-uri (CVE-2024-47176) pattern. |
+| `ipp_print_job` | Fires on a Print-Job operation. |
+| `ipp_validate_job` | Fires on a Validate-Job operation. |
+| `ipp_create_job` | Fires on a Create-Job operation. |
+| `ipp_send_document` | Fires on a Send-Document operation. |
+| `ipp_cancel_job` | Fires on a Cancel-Job operation; records the job id. |
+
 ### Kubernetes_tcp
 
 A low interaction TCP Kubernetes service. Emulates a Kubernetes API server, responding to common `kubectl` API paths (nodes, pods, secrets, namespaces, deployments, RBAC) with plausible JSON payloads. Captures bearer tokens, anonymous access, request bodies, and pod exec/attach/portforward attempts.
@@ -448,6 +576,17 @@ description = Send basic Kubernetes server replies.
 enabled     = Yes
 ```
 
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `http_request` | Captures each API request's method, path, and query string. |
+| `user_agent` | Captures the request User-Agent header. |
+| `bearer_token` | Captures a Bearer token presented in the Authorization header. |
+| `anonymous_access` | Fires on a request made with no authentication credentials. |
+| `body_capture` | Captures the (truncated) request body. |
+| `exec_attempt` | Fires on a pod exec/attach/portforward subresource request. |
+
 ### LDAP_tcp
 
 A low interaction TCP LDAP service. Captures bind attempts (anonymous and credential), directory search queries, and write-operation attempts. Detects Log4Shell JNDI injection (CVE-2021-44228) and classic LDAP filter-injection patterns. Binds using any password from a built-in common-password list are accepted; all other passwords are rejected.
@@ -462,6 +601,19 @@ port        = tcp:389
 description = LDAP server
 enabled     = Yes
 ```
+
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `cve_attempt` | Fires on a Log4Shell JNDI pattern (CVE-2021-44228) detected in request text. |
+| `injection_attempt` | Fires on an LDAP filter-injection pattern detected in request text. |
+| `anonymous_bind` | Fires on an anonymous (empty-credential) bind. |
+| `bind_attempt` | Captures an authenticated bind attempt and supplied credentials. |
+| `search_query` | Captures an LDAP search request. |
+| `modify_attempt` | Captures an LDAP modify request. |
+| `add_attempt` | Captures an LDAP add request. |
+| `delete_attempt` | Captures an LDAP delete request. |
 
 ### LPD_tcp
 
@@ -486,6 +638,14 @@ config      = /etc/honeydb/lpd.json
 | `save_jobs` | bool | `false` | Write received print job files to disk. |
 | `upload_dir` | string | `/tmp/honeydb/var/uploads/print_jobs` | Directory for saved print job files and metadata. Only used when `save_jobs` is `true`. |
 
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `job_info` | Captures print-job metadata from the control file (hostname, user, job name, source filename, queue). |
+| `data_info` | Captures the print-job data summary (detected print format and data size). |
+| `unexpected_queue` | Fires when a job targets a print queue name not in the known-queues list. |
+
 ### Memcached_tcp
 
 A low interaction TCP Memcached service. Accepts connections and returns plausible Memcached text-protocol responses without storing any data. Captures which cache keys clients probe, write attempts, and destructive commands such as `flush_all`.
@@ -507,6 +667,14 @@ config      = /etc/honeydb/memcached.json
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | `version` | string | `"1.6.12"` | Memcached version string returned in `VERSION` and `STATS` responses. |
+
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `memcached_keys_probed` | Captures a read command (get/gets) and the keys requested. |
+| `memcached_write_attempt` | Captures a write command (set/add/replace/append/prepend) and its key/storage metadata. |
+| `memcached_flush` | Captures a `flush_all` command and its optional delay. |
 
 ### Modbus_tcp
 
@@ -551,6 +719,15 @@ Vendor profiles:
 | `allen_bradley` | Rockwell Automation | MicroLogix 1400 | 21.003 |
 | `generic` | Generic PLC | Generic PLC | 1.0.0 |
 
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `function_code` | Captures a valid Modbus function-code request (FC, name, unit/transaction IDs, request parameters). |
+| `write_attempt` | Captures a write function code that modifies the simulated data store. |
+| `scan_pattern` | Fires on detected scanning behavior (sequential address walk or multi-function-code enumeration). |
+| `parse_error` | Fires when a frame fails to parse; captures the raw hex of the offending PDU. |
+
 ### MOTD_tcp
 
 A low interaction TCP Message Of The Day (MOTD) service. On connect, sends a banner selected at random from the configured list (or built-in IoT/embedded-device defaults: OpenWrt router, Hikvision IP camera, Synology NAS, Home Assistant hub) and closes the connection.
@@ -585,6 +762,13 @@ enabled     = Yes
 }
 ```
 
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `scanner_fingerprint` | Fires when received bytes match a known scanner fingerprint. |
+| `credential_like_string` | Fires when received bytes contain credential-like strings. |
+
 ### MOTD_udp
 
 A low interaction UDP Message Of The Day (MOTD) service. Replies to each received datagram with a banner selected at random from the configured list (or built-in IoT/embedded-device defaults: OpenWrt router, Hikvision IP camera, Synology NAS, Home Assistant hub).
@@ -610,6 +794,13 @@ enabled     = Yes
 | `event_field_max_bytes` | int | `1024` | Per-string byte truncation cap inside event payloads. |
 | `override_name` | bool | `false` | When `false`, the service is reported as `"MOTD"` to normalize naming with `MOTD_tcp`. |
 
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `scanner_fingerprint` | Fires when received datagram bytes match a known scanner fingerprint. |
+| `credential_like_string` | Fires when received datagram bytes contain credential-like strings. |
+
 ### MQTT_tcp
 
 A low interaction TCP MQTT service. Emulates an MQTT broker that accepts all connections, capturing credentials, topic subscriptions, published payloads, and known IoT device patterns (Home Assistant, Tasmota, Zigbee2MQTT, Shelly, and others) from connecting clients.
@@ -624,6 +815,17 @@ port        = tcp:1883
 description = MQTT
 enabled     = Yes
 ```
+
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `connect` | Captures a CONNECT packet (client ID, protocol version, supplied/absent credentials). |
+| `will` | Captures a declared Last Will (topic, message size/preview). |
+| `subscribe` | Captures a SUBSCRIBE (topic, wildcard flag, known IoT topic pattern). |
+| `publish` | Captures a PUBLISH (topic, payload size/preview, known IoT topic pattern). |
+| `large_message` | Fires when a publish message exceeds the logging cap (total/logged/dropped bytes). |
+| `disconnect` | Fires on a DISCONNECT packet. |
 
 ### MSSQL_tcp
 
@@ -661,6 +863,20 @@ Version hex string reference:
 | 2019 (v15) | `0f000000` |
 | 2022 (v16) | `10000000` |
 
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `prelogin` | Captures a parsed PRELOGIN packet and the client's pre-login options. |
+| `advertised_version` | Records the server version advertised back during pre-login. |
+| `client_login` | Captures a parsed LOGIN7 packet (login details, auth type, result). |
+| `ntlm_auth` | Captures NTLM authentication data (domain, username, workstation) from a Windows-auth login. |
+| `query` | Captures the decoded SQL text of a client batch query. |
+| `rpc` | Captures a parsed RPC request (procedure name, first string parameter). |
+| `attack_pattern` | Fires when query/RPC text matches an attack pattern (`xp_cmdshell`, `sp_configure`, UNC injection, enumeration). |
+| `tool_fingerprint` | Fires when the client app/library name matches a known tool fingerprint. |
+| `parse_error` | Fires when a TDS header or packet fails to parse. |
+
 ### MySQL_tcp
 
 A low interaction TCP MySQL service. Emulates a MySQL 5.7/8.x server and simulates a complete authenticated session — every login is accepted — to capture credentials, post-login SQL queries, attack patterns (file read/write, UDF code execution, schema enumeration), and attack tool fingerprints (sqlmap, metasploit, hydra, and others).
@@ -692,6 +908,19 @@ config      = /etc/honeydb/mysql.json
 }
 ```
 
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `client_info` | Captures client handshake-response info during login. |
+| `credentials` | Captures the username and auth data from the client login. |
+| `query` | Captures the scrubbed SQL text of a COM_QUERY. |
+| `db_change` | Captures a database switch (COM_INIT_DB) and the target database. |
+| `unknown_command` | Fires on an unrecognized MySQL command byte. |
+| `attack_pattern` | Fires when query text matches a known attack pattern. |
+| `tool_fingerprint` | Fires when a client name or query matches a known tool fingerprint. |
+| `parse_error` | Fires when a packet fails to parse. |
+
 ### NTP_udp
 
 A low interaction UDP NTP service. Emulates a stratum-2 NTP server, responding to standard NTP client requests. Detects NTP Mode 7 monlist requests associated with the CVE-2013-5211 NTP amplification DDoS attack.
@@ -706,6 +935,14 @@ port        = udp:123
 description = NTP service.
 enabled     = Yes
 ```
+
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `ntp_mode7` | Fires on an NTP Mode 7 private-mode packet; tags CVE-2013-5211 on monlist request codes. |
+| `ntp_client_info` | Captures a parsed standard NTP request (client version, mode, stratum). |
+| `ntp_error` | Fires when packet parsing raises an error. |
 
 ### Oracle_tcp
 
@@ -733,6 +970,19 @@ config      = /etc/honeydb/oracle.json
 | `timeout` | int | `30` | Seconds before closing a connection that has not completed authentication. |
 | `post_auth_timeout` | int | `30` | Seconds of inactivity after authentication before closing. |
 
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `connect_info` | Captures a TNS CONNECT (service name, client id, username, raw connect string). |
+| `cve` | Fires when the service name matches CVE-2012-1675 (TNS Poison) indicators. |
+| `privilege_escalation` | Fires when a connect string requests SYSDBA or SYSOPER privileges. |
+| `client_version` | Captures the decoded client version when present in the connect string. |
+| `auth_attempt` | Captures the submitted username and password. |
+| `post_auth_command` | Captures a post-auth SQL statement (type, raw SQL, tables, columns). |
+| `attack_pattern` | Fires when post-auth SQL matches a known Oracle attack pattern. |
+| `post_auth_summary` | Reports the count of post-auth packets seen at timeout or connection close. |
+
 ### POP3_tcp
 
 A low interaction TCP POP3 service. Attracts credential-stuffing attacks, automated mail-client probes, and post-authentication enumeration activity. Captures usernames, passwords, and message retrieval activity.
@@ -758,6 +1008,16 @@ config      = /etc/honeydb/pop3.json
 | `valid_passwords` | list | `["admin","letmein","password123","password"]` | Passwords accepted for any username. |
 | `capabilities` | list | `["USER","UIDL","TOP"]` | Capabilities advertised by the CAPA command. |
 
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `username` | Captures the username from the USER command. |
+| `credentials` | Captures the username/password pair from the PASS command. |
+| `pop3_retr` | Captures the message number from a RETR command. |
+| `pop3_uidl` | Captures the message number from a UIDL command. |
+| `pop3_top` | Captures the message number and requested line count from a TOP command. |
+
 ### PostgreSQL_tcp
 
 A low interaction TCP PostgreSQL service (wire protocol v3). Captures credential spray attempts, client tool fingerprints (hydra, nmap, sqlmap, metasploit, and others), and — when `allow_login` is enabled — post-authentication queries and attack patterns, including CVE-2019-9193 (`COPY ... FROM PROGRAM`) attempts.
@@ -782,6 +1042,18 @@ config      = /etc/honeydb/postgresql.json
 | `os_version` | string | `"14.2-1.pgdg20.04+1"` | OS suffix appended to the version string as `(Ubuntu <os_version>)`. Leave empty to omit. |
 | `max_connections` | int | `100` | Advertised after successful auth (allow_login mode). |
 | `allow_login` | bool | `false` | When `true`, authentication succeeds (fake) and the session advances to query capture mode. When `false`, authentication always fails after capturing credentials. |
+
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `startup_info` | Captures a valid startup message (user, database, encoding, application_name, protocol version). |
+| `tool_detection` | Fires when the application_name matches a known client/scanner fingerprint. |
+| `auth_attempt` | Captures a password message (user, database, submitted password). |
+| `query` | Captures the SQL text of a simple Query message. |
+| `attack_pattern` | Fires when query SQL matches a detected attack pattern. |
+| `unexpected_message` | Fires when a non-password message arrives during the auth phase. |
+| `parse_error` | Fires on an oversized or malformed startup/password/query message. |
 
 ### ProConOs_tcp
 
@@ -820,6 +1092,18 @@ Device profiles:
 | `axc_f_2152` | AXC F 2152 V 2.0.4 | MainProcess | RUN |
 | `rfc_460r` | RFC 460R PN 3TX V 5.20 | WaterControl | STOP |
 | `generic` | Generic PLC V 1.0 | Project | RUN |
+
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `identify` | Fires on an IDENTIFY (device fingerprint) request. |
+| `plc_state_query` | Fires on a PLC state query. |
+| `project_info` | Fires on a project-info request. |
+| `write_attempt` | Fires on a PLC start/stop control command (high severity). |
+| `unknown_command` | Fires on an unrecognized command byte; captures the byte and raw hex. |
+| `scan_pattern` | Fires when the per-session command count reaches the probe threshold. |
+| `parse_error` | Fires on a buffer-overflow or frame-dispatch error; captures the raw hex. |
 
 ### Random_tcp
 
@@ -866,6 +1150,18 @@ config      = /etc/honeydb/raw.json
 | `banner` | string | (none) | Bytes sent to the client on connect. Preset values: `"hp_laserjet"`, `"brother"`, `"xerox"`. Any other non-empty string is sent verbatim. Omit or set to empty to send nothing (default). |
 | `tag_known_cves` | bool | `true` | Enable CVE pattern detection events. |
 
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `print_format` | Captures the detected print format of each print job (PJL, PostScript, PCL, etc.). |
+| `pjl_job_name` | Captures the job name from a PJL JOB NAME directive. |
+| `pjl_username` | Captures the username from a PJL JOB/SET directive. |
+| `pjl_info_probe` | Fires on a PJL INFO/ECHO probe directive. |
+| `pjl_filesystem_access` | Fires on a PJL filesystem-access command. |
+| `postscript_dangerous_operator` | Fires when a dangerous PostScript operator appears in a job. |
+| `cve_attempt` | Fires on path traversal in a PJL FS command (CVE-2024-47076) or Foomatic RIP shell injection in a PJL directive (CVE-2024-47177). |
+
 ### RDP_tcp
 
 A low interaction TCP RDP service. Emulates the RDP connection handshake (X.224, TLS upgrade, MCS channel negotiation) to maximize credential capture, then terminates the connection after the client submits credentials. Captures requested security protocols, routing cookies, and submitted domain/username/password values. Detects CVE-2019-0708 (BlueKeep) exploit attempts.
@@ -880,6 +1176,15 @@ port        = tcp:3389
 description = RDP service.
 enabled     = Yes
 ```
+
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `cookie` | Captures the mstshash routing-cookie identifier when present. |
+| `requested_protocols` | Captures the requested security protocols from the RDP negotiation request. |
+| `cve` | Fires when BlueKeep (CVE-2019-0708) ms_t120 channel binding is detected. |
+| `credentials` | Captures the domain, username, and password from the Info PDU. |
 
 ### Redis_tcp
 
@@ -903,6 +1208,19 @@ config      = /etc/honeydb/redis.json
 |-----|------|---------|-------------|
 | `decoy_password` | string or null | `null` | Exact password that results in a fake authenticated session; null or empty disables the feature. |
 
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `auth_attempt` | Captures the password (and ACL username on Redis 6+) supplied with an AUTH command. |
+| `auth_result` | Fires when a submitted password matches the configured decoy password. |
+| `config_set` | Captures a CONFIG SET key/value; tags config-based RCE setups. |
+| `lua_script` | Captures an EVAL Lua script body; tags CVE-2022-0543 on sandbox-escape patterns. |
+| `evalsha` | Captures the SHA passed to EVALSHA. |
+| `slaveof` | Captures the host/port targeted by SLAVEOF/REPLICAOF. |
+| `slaveof_no_one` | Fires on SLAVEOF/REPLICAOF NO ONE (replication detachment). |
+| `module_load` | Captures a MODULE LOAD path used for module-injection RCE. |
+
 ### SIP_udp
 
 A low interaction UDP SIP service. Emulates a SIP registrar/proxy to capture toll fraud attempts, credential stuffing (Digest auth brute-forcing via REGISTER floods), and reconnaissance probes from automated scanners. Known SIP scanner tools (sipvicious, friendly-scanner, sipsak, and others) are detected and flagged.
@@ -924,6 +1242,15 @@ config      = /etc/honeydb/sip.json
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | `server_header` | string | `"Asterisk PBX"` | Value sent in the SIP `Server:` response header. Set to match the identity of a real SIP server (e.g. `"FreeSWITCH-mod_sofia/1.10.9"`, `"Cisco-SIPGateway/IOS-12.x"`). |
+
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `sip_request` | Captures the method and key headers (User-Agent, From/To URI, Call-ID) of an incoming SIP request. |
+| `options_probe` | Fires on a SIP OPTIONS request. |
+| `sip_auth_attempt` | Captures Authorization/Proxy-Authorization credentials (scheme, username, realm, uri, algorithm). |
+| `abuse_pattern` | Fires when the User-Agent matches a known scanner/abuse pattern. |
 
 ### SMTP_tcp
 
@@ -954,6 +1281,20 @@ config      = /etc/honeydb/smtp.json
     "version_string": "ESMTP Exim 4.96"
 }
 ```
+
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `helo_domain` | Captures the domain argument from EHLO/HELO. |
+| `from_address` | Captures the sender from MAIL FROM. |
+| `to_address` | Captures the recipient from RCPT TO. |
+| `auth_type` | Records the requested AUTH mechanism (PLAIN/LOGIN). |
+| `auth_credentials` | Captures the username/password from an AUTH PLAIN or AUTH LOGIN attempt. |
+| `vrfy_address` | Captures the address probed via VRFY. |
+| `expn_list` | Captures the mailing list probed via EXPN. |
+| `email_header` | Captures selected DATA message headers (Subject, From, To, etc.). |
+| `abuse_type` | Fires on an open-relay probe, header injection, or known-bad EHLO string. |
 
 ### SNMP_udp
 
@@ -990,6 +1331,15 @@ Example override to rename the device:
   }
 }
 ```
+
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `snmp_request` | Captures each SNMP request (version, community, PDU type, OIDs). |
+| `set_attempt` | Captures each varbind OID/value (and writability) on an SNMP SET. |
+| `mib_walk_detected` | Fires on a suspected MIB walk (high GETBULK max-repetitions or repeated GETNEXT). |
+| `cve_probe` | Fires on an oversized community string (CVE-2002-0013) or known Cisco CVE OID prefixes. |
 
 ### SSH_tcp
 
@@ -1049,6 +1399,16 @@ config      = /etc/honeydb/tftp.json
 | `max_active_sessions` | int | `1000` | Cap on concurrent tracked sessions. |
 | `iot_firmware_keywords` | list | `[]` | Additional filename keywords that trigger IoT firmware detection. Merged with the built-in list (`firmware`, `boot.img`, `uimage`, `bzimage`, `vmlinuz`, `rootfs`, `kernel.img`, `factory.bin`). |
 
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `get_file` | Captures the filename and mode from an RRQ (read request). |
+| `put_file` | Captures the filename and mode from a WRQ (write request). |
+| `upload_data` | Captures buffered hex of an uploaded file (blocks received, completion/truncation flags). |
+| `abuse_pattern` | Fires on path traversal, IoT firmware keywords, invalid transfer mode, or binary-in-netascii. |
+| `parse_error` | Fires when a datagram cannot be parsed; captures the error and raw hex. |
+
 ### VNC_tcp
 
 A low interaction TCP VNC service (RFB protocol). Implements the RFB handshake (versions 3.3/3.7/3.8), configurable security-type negotiation, dictionary-attack VNC authentication, and a synthetic post-auth desktop served as a static screenshot. Captures handshake details, authentication attempts, and post-auth keyboard/mouse/clipboard activity. Detects CVE-2006-2369 (RealVNC authentication bypass) probes.
@@ -1097,3 +1457,19 @@ Security-type presets:
 
 !!! note
     Operator-supplied screenshot images are sent verbatim to attackers — never include real desktop content; use synthetic or generic images only.
+
+#### INFO Events
+
+| Event | Description |
+|-------|-------------|
+| `rfb_handshake` | Captures the server/client RFB versions and downgrade flag. |
+| `security_choice` | Captures the advertised security types and the selected type. |
+| `auth_attempt` | Captures the VNC-auth challenge/response and any matched wordlist password. |
+| `client_init` | Captures the ClientInit shared-desktop flag. |
+| `set_pixel_format` | Captures the client-supplied pixel format. |
+| `set_encodings` | Captures the client's advertised encoding list and total count. |
+| `framebuffer_update_request` | Captures the requested rectangle (x/y/w/h) and incremental flag. |
+| `key_event` | Captures keyboard events (keysym, down flag, ASCII). |
+| `pointer_event` | Captures pointer position and button mask. |
+| `client_cut_text` | Captures clipboard cut-text length and content. |
+| `abuse_pattern` | Fires on CVE/fingerprint probes (e.g. CVE-2006-2369) and malformed/oversize/unknown client messages. |
