@@ -1,5 +1,9 @@
-# HoneyDB Agent Docs
+# HoneyDB Agent Docs — Moved
 
-[![Documentation Status](https://readthedocs.org/projects/honeypy/badge/?version=latest)](http://honeydb-agent-docs.readthedocs.io/en/latest/?badge=latest)
+The HoneyDB Agent documentation now lives in the
+[honeydbio/honeydb-web](https://github.com/honeydbio/honeydb-web) repository
+(source in `mkdocs/src/`, built with MkDocs + Material for MkDocs) and is
+published at **[https://honeydb.io/docs/](https://honeydb.io/docs/)**.
 
-[https://honeydb-agent-docs.readthedocs.io/](https://honeydb-agent-docs.readthedocs.io/)
+This repository is retained for history only and is no longer updated
+(honeydbio/honeydb-agent#634).
